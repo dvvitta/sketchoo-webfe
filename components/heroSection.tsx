@@ -1,10 +1,10 @@
-import Image from "next/image";
+import Link from "next/link";
 
 export default function HeroSection() {
   return (
     <section
       id="beranda"
-      className="relative w-full min-h-[580px] lg:min-h-[680px] flex items-center overflow-hidden bg-cover bg-center lg:bg-right"
+      className="relative w-full min-h-[580px] lg:min-h-[680px] flex items-center overflow-hidden bg-cover bg-center lg:bg-right pt-20"
       style={{ backgroundImage: "url('/Unknown.png')" }}
     >
       {/* Kontainer Konten Sisi Kiri */}
@@ -16,37 +16,61 @@ export default function HeroSection() {
           </h1>
 
           {/* Deskripsi */}
-          <p className="text-lg md:text-xl text-slate-800 leading-relaxed max-w-md">
-            Permainan bagi si kecil melatih nalar dan otak agar si kecil sehat bugar enak mamah
+          <p className="text-lg md:text-xl text-slate-800 font-semibold leading-relaxed max-w-md">
+            Ruang bermain dan belajar interaktif untuk si kecil melatih logika,
+            bebas berimajinasi, dan belajar tanpa rasa bosan.
           </p>
 
-          {/* Tombol CTA */}
-          <div className="flex flex-wrap items-center gap-5 pt-2">
+          {/* Tombol Aksi */}
+          <div className="flex flex-wrap items-center gap-6 pt-2">
+            {/* Badge Google Play */}
             <a
-              href="#"
-              className="bg-black hover:bg-neutral-900 text-white px-5 py-2.5 rounded-xl flex items-center gap-3 shadow-lg transition-transform hover:-translate-y-0.5"
+              href="https://play.google.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-block transition-transform hover:scale-105 active:scale-95"
             >
-              <svg className="w-5 h-5 fill-current text-emerald-400" viewBox="0 0 24 24">
-                <path d="M3.609 1.814L13.793 12 3.61 22.186A2.373 2.373 0 0 1 3 20.536V3.464c0-.663.224-1.266.609-1.65zM15.207 13.414l2.743 2.743-12.44 7.18 9.697-9.923zm0-2.828L5.51 3.663l12.44 7.18-2.743 2.743zm1.414 1.414l3.668 2.118a1.5 1.5 0 0 0 0-2.597l-3.668-2.121z" />
-              </svg>
-              <div className="text-left">
-                <div className="text-[9px] uppercase tracking-wider text-gray-300 leading-none">GET IT ON</div>
-                <div className="text-sm font-bold leading-tight">Google Play</div>
+              <div className="bg-black text-white px-4 py-2 rounded-xl flex items-center gap-3 border border-neutral-700 shadow-md">
+                <svg className="w-7 h-7 flex-shrink-0" viewBox="0 0 512 512">
+                  <path
+                    fill="#00F076"
+                    d="M380.9 237.9L108.6 80.6c-21.7-12.5-44.6-2-44.6 23.1v404.6c0 25.1 22.9 35.6 44.6 23.1l272.3-157.3c21.8-12.6 21.8-33.6 0-46.2z"
+                  />
+                  <path
+                    fill="#00D2FF"
+                    d="M380.9 237.9L108.6 80.6c-21.7-12.5-44.6-2-44.6 23.1v152.3l209.6 121 107.3-62.1c21.8-12.6 21.8-33.6 0-46.2z"
+                  />
+                  <path
+                    fill="#FF3333"
+                    d="M64 103.7v304.6c0 25.1 22.9 35.6 44.6 23.1l272.3-157.3L273.6 256 64 103.7z"
+                  />
+                  <path
+                    fill="#FFD400"
+                    d="M380.9 274.1L273.6 212 64 333.3v75c0 25.1 22.9 35.6 44.6 23.1l272.3-157.3z"
+                  />
+                </svg>
+
+                <div className="flex flex-col text-left leading-none justify-center">
+                  <span className="text-[9px] uppercase tracking-wider text-neutral-300 font-medium">
+                    GET IT ON
+                  </span>
+                  <span className="text-[17px] font-bold text-white tracking-tight mt-0.5 font-sans">
+                    Google Play
+                  </span>
+                </div>
               </div>
             </a>
 
-            <a
+            {/* Link Cara Main */}
+            <Link
               href="#cara-main"
-              className="text-[#5B3DF5] hover:text-[#4326d6] font-bold text-sm flex items-center gap-1.5 transition-colors"
+              className="text-[#6B46FF] hover:text-[#532fe0] font-extrabold text-base flex items-center gap-2 transition-transform hover:translate-x-1"
             >
-              Lihat Cara Main <span className="text-lg">&rarr;</span>
-            </a>
+              Lihat Cara Main &rarr;
+            </Link>
           </div>
         </div>
       </div>
-
-      {/* Lengkungan Bawah Lembut Menuju Section Berikutnya */}
-      <div className="absolute bottom-0 left-0 right-0 h-12 bg-gradient-to-t from-white to-transparent pointer-events-none" />
     </section>
   );
 }

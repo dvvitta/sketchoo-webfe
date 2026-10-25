@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Poppins } from "next/font/google";
+import Image from "next/image";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -8,14 +9,23 @@ const poppins = Poppins({
 
 export default function Navbar() {
   return (
-    <header className={`absolute top-0 left-0 w-full z-30 ${poppins.className}`}>
+    <header
+      className={`absolute top-0 left-0 w-full z-30 ${poppins.className}`}
+    >
       <nav className="w-full px-6 py-6 flex items-center justify-between">
-        {/* Logo */}
-        <div className="flex items-center gap-2">
-          <span className="font-extrabold text-2xl tracking-wider text-[#5B3DF5]">
-            SKETCHOO!
-          </span>
-        </div>
+        {/* Logo Image */}
+        <Link href="#beranda" className="flex items-center">
+          <div className="relative w-28 sm:w-32 md:w-36 h-auto">
+            <Image
+              src="/logo.png" // sesuaikan nama file logo di folder public/
+              alt="Logo SKETCHOO"
+              width={160}
+              height={90}
+              priority
+              className="w-full h-auto object-contain"
+            />
+          </div>
+        </Link>
 
         {/* Menu Navigasi dengan Font Poppins */}
         <div className="hidden md:flex items-center gap-8 text-sm font-semibold text-slate-800">
