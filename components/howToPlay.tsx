@@ -1,36 +1,24 @@
+import Image from "next/image";
+
 export default function HowToPlay() {
   const steps = [
     {
       number: 1,
       title: "Unduh Aplikasi",
-      desc: "Install Sketchoo dari Google Play, gratis dan langsung bisa dipakai.",
-      icon: (
-        <svg className="w-6 h-6 text-[#5B3DF5]" fill="none" stroke="currentColor" strokeWidth={2.5} viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-          <path strokeLinecap="round" strokeLinejoin="round" d="M5 21h14" />
-        </svg>
-      ),
+      desc: "Cari dan install Sketchoo dari Google Play Store secara gratis untuk memulai petualangan.",
+      imagePath: "/unduh.jpeg", // <--- Menggunakan unduh.jpeg
     },
     {
       number: 2,
       title: "Login atau Daftar",
-      desc: "Install Sketchoo dari Google Play, gratis dan langsung bisa dipakai.",
-      icon: (
-        <svg className="w-6 h-6 text-[#5B3DF5]" fill="none" stroke="currentColor" strokeWidth={2.5} viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
-        </svg>
-      ),
+      desc: "Masuk dengan akun yang sudah ada atau daftar baru dengan mudah menggunakan kode dari gurumu.",
+      imagePath: "/login.jpeg", // <--- Menggunakan login.jpeg
     },
     {
       number: 3,
       title: "Main Permainannya",
-      desc: "Install Sketchoo dari Google Play, gratis dan langsung bisa dipakai.",
-      icon: (
-        <svg className="w-6 h-6 text-[#5B3DF5]" fill="none" stroke="currentColor" strokeWidth={2.5} viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-          <path strokeLinecap="round" strokeLinejoin="round" d="M5 21h14" />
-        </svg>
-      ),
+      desc: "Ekspresikan kreativitasmu! Mulai menggambar, mewarnai, dan ikuti petualangan seru di dalam game.",
+      imagePath: "/mewarnai.jpeg", // <--- Menggunakan mewarnai.jpeg
     },
   ];
 
@@ -65,25 +53,31 @@ export default function HowToPlay() {
             {steps.map((step) => (
               <div
                 key={step.number}
-                className="relative bg-white rounded-3xl p-6 pt-9 pb-8 shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-slate-100 flex flex-col items-center text-center transition-all hover:-translate-y-1"
+                className="relative bg-white rounded-[2rem] p-6 pt-9 pb-8 shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-slate-100 flex flex-col items-center text-center transition-all hover:-translate-y-1"
               >
                 {/* Badge Angka Bulat di Atas Card */}
-                <div className="absolute -top-5 left-1/2 -translate-x-1/2 w-10 h-10 rounded-full bg-[#5B3DF5] text-white font-bold text-sm flex items-center justify-center shadow-md">
+                <div className="absolute -top-5 left-1/2 -translate-x-1/2 w-10 h-10 rounded-full bg-[#5B3DF5] text-white font-bold text-sm flex items-center justify-center shadow-md z-10">
                   {step.number}
                 </div>
 
-                {/* Kotak Lavender Lembut untuk Icon */}
-                <div className="w-full h-32 rounded-2xl bg-[#F1EDFD] flex items-center justify-center mb-6">
-                  {step.icon}
+                {/* Container Gambar yang Menarik */}
+                <div className="w-full h-44 rounded-2xl bg-[#F1EDFD] flex items-center justify-center mb-6 overflow-hidden relative border border-slate-50">
+                  <Image
+                    src={step.imagePath}
+                    alt={step.title}
+                    fill
+                    className="object-cover object-center group-hover:scale-105 transition-transform duration-300"
+                    sizes="(max-width: 768px) 100vw, 33vw"
+                  />
                 </div>
 
                 {/* Judul Langkah */}
-                <h3 className="text-base font-bold text-slate-800 mb-2">
+                <h3 className="text-base font-extrabold text-slate-800 mb-2">
                   {step.title}
                 </h3>
 
                 {/* Deskripsi */}
-                <p className="text-xs leading-relaxed text-slate-500 max-w-[220px]">
+                <p className="text-xs leading-relaxed text-slate-500 max-w-[240px]">
                   {step.desc}
                 </p>
               </div>
