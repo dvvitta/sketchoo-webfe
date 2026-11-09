@@ -110,27 +110,27 @@ export default function SuperadminDashboardPage() {
       className={`min-h-screen bg-[#F8F9FD] text-slate-800 flex flex-col ${jakarta.className}`}
     >
       {/* Top Navbar */}
-      <header className="bg-white border-b border-slate-100 sticky top-0 z-30 px-6 py-4 flex items-center justify-between">
-        <div className="flex items-center gap-3">
-          <div className="w-9 h-9 rounded-2xl bg-[#6342E8] text-white flex items-center justify-center font-black text-lg shadow-md shadow-[#6342E8]/20">
+      <header className="bg-white border-b border-slate-100 sticky top-0 z-30 px-4 sm:px-6 py-3 sm:py-4 flex items-center justify-between">
+        <div className="flex items-center gap-2.5 sm:gap-3">
+          <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-2xl bg-[#6342E8] text-white flex items-center justify-center font-black text-base sm:text-lg shadow-md shadow-[#6342E8]/20 shrink-0">
             S
           </div>
           <div>
             <div className="flex items-center gap-2">
-              <span className="font-extrabold text-base tracking-tight text-slate-900">
+              <span className="font-extrabold text-sm sm:text-base tracking-tight text-slate-900">
                 SKETCHOO
               </span>
-              <span className="px-2.5 py-0.5 rounded-full bg-purple-100 text-purple-700 text-[10px] font-extrabold uppercase tracking-wider">
+              <span className="px-2 py-0.5 rounded-full bg-purple-100 text-purple-700 text-[9px] sm:text-[10px] font-extrabold uppercase tracking-wider">
                 Super Admin
               </span>
             </div>
-            <p className="text-[11px] text-slate-400">
+            <p className="text-[10px] sm:text-[11px] text-slate-400">
               Panel Pengelola Sekolah & Layanan
             </p>
           </div>
         </div>
 
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-2 sm:gap-4">
           <div className="hidden sm:flex flex-col text-right">
             <span className="text-xs font-bold text-slate-800">{userName}</span>
             <span className="text-[10px] text-purple-600 font-semibold">
@@ -141,7 +141,7 @@ export default function SuperadminDashboardPage() {
           <button
             type="button"
             onClick={handleLogout}
-            className="px-3.5 py-2 rounded-xl text-xs font-bold text-slate-500 hover:text-rose-600 hover:bg-rose-50 border border-slate-200 hover:border-rose-200 transition flex items-center gap-1.5 cursor-pointer"
+            className="px-3 sm:px-3.5 py-1.5 sm:py-2 rounded-xl text-xs font-bold text-slate-500 hover:text-rose-600 hover:bg-rose-50 border border-slate-200 hover:border-rose-200 transition flex items-center gap-1.5 cursor-pointer"
           >
             <svg
               className="w-4 h-4"
@@ -156,21 +156,21 @@ export default function SuperadminDashboardPage() {
                 d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M12 9l-3 3m0 0l3 3m-3-3h12.75"
               />
             </svg>
-            <span>Keluar</span>
+            <span className="hidden xs:inline sm:inline">Keluar</span>
           </button>
         </div>
       </header>
 
       {/* Main Content */}
-      <main className="flex-1 p-6 sm:p-8 max-w-7xl w-full mx-auto space-y-8">
+      <main className="flex-1 p-4 sm:p-6 lg:p-8 max-w-7xl w-full mx-auto space-y-6 sm:space-y-8">
         {/* Banner Sambutan */}
-        <div className="rounded-3xl bg-gradient-to-r from-[#6342E8] via-[#7B59FA] to-[#9273FB] p-6 sm:p-8 text-white relative overflow-hidden shadow-xl shadow-[#6342E8]/15">
+        <div className="rounded-3xl bg-gradient-to-r from-[#6342E8] via-[#7B59FA] to-[#9273FB] p-5 sm:p-8 text-white relative overflow-hidden shadow-xl shadow-[#6342E8]/15">
           <div className="relative z-10 max-w-xl">
             <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/20 backdrop-blur-md text-white text-xs font-bold mb-3">
               <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
               Sistem Aktif & Terpantau
             </span>
-            <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight">
+            <h1 className="text-xl sm:text-2xl md:text-3xl font-extrabold tracking-tight">
               Selamat Datang di Super Admin Portal
             </h1>
             <p className="text-xs sm:text-sm text-purple-100 mt-2 font-medium">
@@ -302,8 +302,8 @@ export default function SuperadminDashboardPage() {
             </div>
           </div>
 
-          <div className="overflow-x-auto">
-            <table className="w-full text-left text-xs">
+          <div className="overflow-x-auto -mx-2 sm:mx-0">
+            <table className="w-full min-w-[560px] text-left text-xs">
               <thead>
                 <tr className="border-b border-slate-100 text-slate-400 font-bold uppercase text-[10px] tracking-wider">
                   <th className="py-3 px-4">Nama Sekolah</th>
@@ -377,8 +377,8 @@ export default function SuperadminDashboardPage() {
             </div>
           </div>
 
-          <div className="overflow-x-auto">
-            <table className="w-full text-left text-xs">
+          <div className="overflow-x-auto -mx-2 sm:mx-0">
+            <table className="w-full min-w-[560px] text-left text-xs">
               <thead>
                 <tr className="border-b border-slate-100 text-slate-400 font-bold uppercase text-[10px] tracking-wider">
                   <th className="py-3 px-4">User ID</th>

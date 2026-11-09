@@ -90,7 +90,7 @@ export default function ClassRanking({
 
   return (
     <div
-      className={`bg-white rounded-3xl p-6 border border-slate-100 shadow-sm mt-6 ${jakarta.className}`}
+      className={`bg-white rounded-3xl p-4 sm:p-6 border border-slate-100 shadow-sm mt-6 ${jakarta.className}`}
     >
       <div className="flex items-center justify-between mb-5">
         <div className="flex items-center gap-2">

@@ -3,8 +3,11 @@ export async function apiFetch<T>(
   endpoint: string,
   options: RequestInit = {}
 ): Promise<T> {
-  // Backend berjalan di port 3000 dengan prefix api/v1
-  const baseUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000/api/v1";
+  // Backend URL default mengarah ke production backend jika env tidak diset
+  const rawBaseUrl =
+    process.env.NEXT_PUBLIC_API_URL ||
+    "https://sketchoo-backend.vercel.app/api/v1";
+  const baseUrl = rawBaseUrl.replace(/\/+$/, "");
 
   // Ambil token JWT jika sudah login
   const token =
@@ -16,7 +19,9 @@ export async function apiFetch<T>(
     ...options.headers,
   };
 
-  const response = await fetch(`${baseUrl}${endpoint}`, {
+  const formattedEndpoint = endpoint.startsWith("/") ? endpoint : `/${endpoint}`;
+
+  const response = await fetch(`${baseUrl}${formattedEndpoint}`, {
     ...options,
     headers,
   });

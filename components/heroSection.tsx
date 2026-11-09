@@ -4,25 +4,25 @@ export default function HeroSection() {
   return (
     <section
       id="beranda"
-      className="relative w-full min-h-[580px] lg:min-h-[680px] flex items-center overflow-hidden bg-cover bg-center lg:bg-right pt-20"
+      className="relative w-full min-h-[520px] sm:min-h-[580px] lg:min-h-[680px] flex items-center overflow-hidden bg-cover bg-center lg:bg-right pt-24 sm:pt-28 md:pt-32"
       style={{ backgroundImage: "url('/Unknown.png')" }}
     >
       {/* Kontainer Konten Sisi Kiri */}
-      <div className="w-full max-w-6xl mx-auto px-6 py-12 relative z-10">
-        <div className="max-w-xl space-y-6 text-left">
+      <div className="w-full max-w-6xl mx-auto px-4 sm:px-6 py-8 sm:py-12 relative z-10">
+        <div className="max-w-xl space-y-4 sm:space-y-6 text-left">
           {/* Judul Utama */}
-          <h1 className="text-5xl md:text-6xl font-black text-[#5B3DF5] tracking-tight drop-shadow-sm">
+          <h1 className="text-4xl sm:text-5xl md:text-6xl font-black text-[#5B3DF5] tracking-tight drop-shadow-sm">
             SKETCHOO!
           </h1>
 
           {/* Deskripsi */}
-          <p className="text-lg md:text-xl text-slate-800 font-semibold leading-relaxed max-w-md">
+          <p className="text-base sm:text-lg md:text-xl text-slate-800 font-semibold leading-relaxed max-w-md">
             Ruang bermain dan belajar interaktif untuk si kecil melatih logika,
             bebas berimajinasi, dan belajar tanpa rasa bosan.
           </p>
 
           {/* Tombol Aksi */}
-          <div className="flex flex-wrap items-center gap-6 pt-2">
+          <div className="flex flex-wrap items-center gap-4 sm:gap-6 pt-2">
             {/* Badge Google Play */}
             <a
               href="https://play.google.com"
@@ -30,8 +30,8 @@ export default function HeroSection() {
               rel="noopener noreferrer"
               className="inline-block transition-transform hover:scale-105 active:scale-95"
             >
-              <div className="bg-black text-white px-4 py-2 rounded-xl flex items-center gap-3 border border-neutral-700 shadow-md">
-                <svg className="w-7 h-7 flex-shrink-0" viewBox="0 0 512 512">
+              <div className="bg-black text-white px-3.5 sm:px-4 py-2 rounded-xl flex items-center gap-2.5 sm:gap-3 border border-neutral-700 shadow-md">
+                <svg className="w-6 sm:w-7 h-6 sm:h-7 flex-shrink-0" viewBox="0 0 512 512">
                   <path
                     fill="#00F076"
                     d="M380.9 237.9L108.6 80.6c-21.7-12.5-44.6-2-44.6 23.1v404.6c0 25.1 22.9 35.6 44.6 23.1l272.3-157.3c21.8-12.6 21.8-33.6 0-46.2z"
@@ -51,10 +51,10 @@ export default function HeroSection() {
                 </svg>
 
                 <div className="flex flex-col text-left leading-none justify-center">
-                  <span className="text-[9px] uppercase tracking-wider text-neutral-300 font-medium">
+                  <span className="text-[8px] sm:text-[9px] uppercase tracking-wider text-neutral-300 font-medium">
                     GET IT ON
                   </span>
-                  <span className="text-[17px] font-bold text-white tracking-tight mt-0.5 font-sans">
+                  <span className="text-[15px] sm:text-[17px] font-bold text-white tracking-tight mt-0.5 font-sans">
                     Google Play
                   </span>
                 </div>
@@ -64,7 +64,7 @@ export default function HeroSection() {
             {/* Link Cara Main */}
             <Link
               href="#cara-main"
-              className="text-[#6B46FF] hover:text-[#532fe0] font-extrabold text-base flex items-center gap-2 transition-transform hover:translate-x-1"
+              className="text-[#6B46FF] hover:text-[#532fe0] font-extrabold text-sm sm:text-base flex items-center gap-2 transition-transform hover:translate-x-1"
             >
               Lihat Cara Main &rarr;
             </Link>

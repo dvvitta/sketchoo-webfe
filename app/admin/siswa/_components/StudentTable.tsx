@@ -260,12 +260,12 @@ export default function StudentTable() {
 
   return (
     <div
-      className={`bg-white rounded-3xl p-6 border border-slate-100 shadow-sm mt-6 ${jakarta.className}`}
+      className={`bg-white rounded-3xl p-4 sm:p-6 border border-slate-100 shadow-sm mt-6 ${jakarta.className}`}
     >
       {/* Header Tabel, Search, dan Tombol Tambah */}
-      <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mb-6">
-        <div className="flex items-center gap-2 self-start sm:self-center">
-          <div className="w-8 h-8 rounded-full bg-[#EFEFFD] flex items-center justify-center text-[#6342E8]">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+        <div className="flex items-center gap-2">
+          <div className="w-8 h-8 rounded-full bg-[#EFEFFD] flex items-center justify-center text-[#6342E8] shrink-0">
             <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
               <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
             </svg>
@@ -275,7 +275,7 @@ export default function StudentTable() {
           </h3>
         </div>
 
-        <div className="flex items-center gap-3 w-full sm:w-auto">
+        <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 w-full sm:w-auto">
           {/* Kolom Pencarian */}
           <div className="relative flex-1 sm:w-64">
             <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400">
@@ -306,7 +306,7 @@ export default function StudentTable() {
           <button
             type="button"
             onClick={handleOpenAddModal}
-            className="bg-[#6342E8] hover:bg-[#5233d6] text-white text-xs font-bold px-4 py-2.5 rounded-full flex items-center gap-1.5 shadow-md shadow-[#6342E8]/25 transition hover:scale-[1.02] active:scale-[0.98] whitespace-nowrap cursor-pointer z-10"
+            className="bg-[#6342E8] hover:bg-[#5233d6] text-white text-xs font-bold px-4 py-2.5 rounded-full flex items-center justify-center gap-1.5 shadow-md shadow-[#6342E8]/25 transition hover:scale-[1.02] active:scale-[0.98] whitespace-nowrap cursor-pointer z-10"
           >
             <span className="text-base font-extrabold leading-none">+</span>
             Tambah Siswa
@@ -328,8 +328,8 @@ export default function StudentTable() {
       )}
 
       {/* Tabel Data Siswa */}
-      <div className="overflow-x-auto">
-        <table className="w-full text-left text-xs">
+      <div className="overflow-x-auto -mx-4 sm:mx-0 px-4 sm:px-0">
+        <table className="w-full min-w-[620px] text-left text-xs">
           <thead>
             <tr className="bg-[#F8F9FD] text-slate-500 font-bold">
               <th className="py-3 px-4 rounded-l-xl">No</th>

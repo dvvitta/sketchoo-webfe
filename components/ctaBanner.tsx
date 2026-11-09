@@ -7,24 +7,22 @@ const nunito = Nunito({
 
 export default function CtaBanner() {
   return (
-    // max-w dikecilkan ke 5xl & padding bawah diberi ruang ke footer
-    <section className="w-full max-w-5xl mx-auto px-6 pb-28 md:pb-36">
-      <div className="w-full rounded-[30px] bg-gradient-to-r from-[#5034EB] via-[#6345F5] to-[#927CFF] px-6 py-9 md:py-11 text-center text-white shadow-lg shadow-indigo-500/15 flex flex-col items-center space-y-3">
-        
-        {/* Headline Lebih Ramping & Manis */}
+    <section className="w-full max-w-5xl mx-auto px-4 sm:px-6 pb-16 sm:pb-28 md:pb-36">
+      <div className="w-full rounded-[24px] sm:rounded-[30px] bg-gradient-to-r from-[#5034EB] via-[#6345F5] to-[#927CFF] px-5 sm:px-8 py-8 sm:py-11 text-center text-white shadow-lg shadow-indigo-500/15 flex flex-col items-center space-y-3">
+        {/* Headline */}
         <h2
-          className={`${nunito.className} text-2xl md:text-3xl lg:text-4xl font-extrabold tracking-tight drop-shadow-sm`}
+          className={`${nunito.className} text-xl sm:text-2xl md:text-3xl lg:text-4xl font-extrabold tracking-tight drop-shadow-sm`}
         >
           Yuk, mulai main bareng si kecil!
         </h2>
 
         {/* Subtitle */}
-        <p className={`${nunito.className} text-xs md:text-sm font-semibold text-white/90`}>
+        <p className={`${nunito.className} text-xs sm:text-sm font-semibold text-white/90`}>
           Gratis diunduh di Google Play.
         </p>
 
         {/* Badge Google Play */}
-        <div className="pt-1.5">
+        <div className="pt-2">
           <a
             href="https://play.google.com"
             target="_blank"

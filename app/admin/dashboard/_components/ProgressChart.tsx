@@ -32,9 +32,9 @@ export default function ProgressChart({
 
   return (
     <div
-      className={`bg-white rounded-3xl p-6 border border-slate-100 shadow-sm ${jakarta.className}`}
+      className={`bg-white rounded-3xl p-4 sm:p-6 border border-slate-100 shadow-sm ${jakarta.className}`}
     >
-      <div className="flex items-center justify-between mb-6">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 mb-6">
         <div className="flex items-center gap-2">
           <span className="text-[#6342E8]">
             <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">

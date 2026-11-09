@@ -10,9 +10,10 @@ const jakarta = Plus_Jakarta_Sans({
 
 interface HeaderProps {
   userName?: string;
+  onMenuClick?: () => void;
 }
 
-export default function Header({ userName }: HeaderProps) {
+export default function Header({ userName, onMenuClick }: HeaderProps) {
   const [headerData, setHeaderData] = useState<{
     date: string;
     name: string;
@@ -48,21 +49,37 @@ export default function Header({ userName }: HeaderProps) {
 
   return (
     <header
-      className={`flex flex-wrap items-center justify-between gap-4 mb-8 ${jakarta.className}`}
+      className={`flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6 sm:mb-8 ${jakarta.className}`}
     >
-      <div>
-        <h1 className="text-2xl sm:text-3xl font-extrabold text-[#111827] tracking-tight">
-          Halo, {headerData.name}!
-        </h1>
-        <p className="text-sm font-medium text-slate-500 mt-1">
-          Semangat mengajar dan menemani anak-anak belajar hari ini!
-        </p>
+      <div className="flex items-center gap-3">
+        {/* Tombol Hamburger di Layar Mobile (< lg) */}
+        {onMenuClick && (
+          <button
+            type="button"
+            onClick={onMenuClick}
+            className="lg:hidden p-2 rounded-xl bg-white border border-slate-200 text-slate-700 hover:text-[#6342E8] hover:bg-slate-50 shadow-sm cursor-pointer shrink-0"
+            aria-label="Buka navigasi sidebar"
+          >
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+          </button>
+        )}
+
+        <div>
+          <h1 className="text-xl sm:text-2xl md:text-3xl font-extrabold text-[#111827] tracking-tight">
+            Halo, {headerData.name}!
+          </h1>
+          <p className="text-xs sm:text-sm font-medium text-slate-500 mt-0.5">
+            Semangat mengajar dan menemani anak-anak belajar hari ini!
+          </p>
+        </div>
       </div>
 
-      <div className="flex items-center gap-3">
-        <div className="flex items-center gap-2 bg-white px-4 py-2.5 rounded-full border border-slate-200 text-xs sm:text-sm font-semibold text-slate-700 shadow-sm">
+      <div className="flex items-center gap-2 sm:gap-3 self-end sm:self-auto">
+        <div className="flex items-center gap-2 bg-white px-3 sm:px-4 py-2 sm:py-2.5 rounded-full border border-slate-200 text-xs sm:text-sm font-semibold text-slate-700 shadow-sm">
           <svg
-            className="w-4 h-4 text-slate-500"
+            className="w-4 h-4 text-slate-500 shrink-0"
             fill="none"
             stroke="currentColor"
             strokeWidth="2"
@@ -76,9 +93,13 @@ export default function Header({ userName }: HeaderProps) {
           <span>{headerData.date || "Memuat..."}</span>
         </div>
 
-        <button className="relative w-10 h-10 rounded-full bg-white border border-slate-200 flex items-center justify-center text-slate-600 hover:bg-slate-50 shadow-sm transition">
+        <button
+          type="button"
+          className="relative w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-white border border-slate-200 flex items-center justify-center text-slate-600 hover:bg-slate-50 shadow-sm transition cursor-pointer"
+          aria-label="Notifikasi"
+        >
           <svg
-            className="w-5 h-5"
+            className="w-4 h-4 sm:w-5 sm:h-5"
             fill="none"
             stroke="currentColor"
             strokeWidth="2"
@@ -95,7 +116,7 @@ export default function Header({ userName }: HeaderProps) {
           </span>
         </button>
 
-        <div className="w-10 h-10 rounded-full bg-[#EFEFFD] border-2 border-white text-[#6342E8] font-bold text-xs flex items-center justify-center shadow-sm shrink-0">
+        <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-[#EFEFFD] border-2 border-white text-[#6342E8] font-bold text-xs flex items-center justify-center shadow-sm shrink-0">
           {headerData.name.charAt(0)}
         </div>
       </div>

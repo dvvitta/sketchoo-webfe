@@ -17,6 +17,7 @@ export default function AdminDashboardPage() {
   const [students, setStudents] = useState<StudentItem[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [errorMessage, setErrorMessage] = useState("");
+  const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false);
 
   const fetchDashboardData = useCallback(async () => {
     setIsLoading(true);
@@ -68,13 +69,16 @@ export default function AdminDashboardPage() {
   }, [router, fetchDashboardData]);
 
   return (
-    <div className="flex min-h-screen bg-[#F8F9FC]">
-      {/* Sidebar Navigasi */}
-      <Sidebar />
+    <div className="flex min-h-screen bg-[#F8F9FC] relative">
+      {/* Sidebar Navigasi Responsif */}
+      <Sidebar
+        isOpen={isMobileSidebarOpen}
+        onClose={() => setIsMobileSidebarOpen(false)}
+      />
 
       {/* Konten Dashboard */}
-      <main className="flex-1 p-6 lg:p-8 overflow-y-auto">
-        <Header />
+      <main className="flex-1 p-4 sm:p-6 lg:p-8 overflow-y-auto w-full min-w-0">
+        <Header onMenuClick={() => setIsMobileSidebarOpen(true)} />
 
         {/* Notifikasi Error jika gagal terhubung */}
         {errorMessage && (

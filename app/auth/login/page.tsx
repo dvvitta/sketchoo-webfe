@@ -60,7 +60,7 @@ export default function LoginPage() {
 
   return (
     <div
-      className={`min-h-screen w-full flex items-center justify-center relative overflow-hidden bg-[#D8CEFA] ${jakarta.className}`}
+      className={`min-h-screen w-full flex items-center justify-center relative overflow-hidden bg-[#D8CEFA] p-4 sm:p-6 md:p-8 ${jakarta.className}`}
     >
       {/* Background Ilustrasi */}
       <div className="absolute inset-0 z-0 pointer-events-none">
@@ -75,13 +75,13 @@ export default function LoginPage() {
       </div>
 
       {/* Kontainer Utama */}
-      <div className="relative z-10 w-full max-w-6xl flex flex-col lg:flex-row items-center justify-end lg:justify-between px-6 sm:px-12 py-8">
+      <div className="relative z-10 w-full max-w-6xl flex flex-col lg:flex-row items-center justify-center lg:justify-between py-4 sm:py-8">
         
         {/* Spacer Maskot Harimau di Kiri */}
         <div className="hidden lg:block w-1/2" />
 
         {/* Card Form Login Putih Rounded di Kanan */}
-        <div className="w-full max-w-[410px] bg-white/95 backdrop-blur-md rounded-[2.5rem] p-7 sm:p-9 shadow-2xl shadow-indigo-900/15 border border-white/90 relative">
+        <div className="w-full max-w-[420px] bg-white/95 backdrop-blur-md rounded-[2rem] sm:rounded-[2.5rem] p-6 sm:p-9 shadow-2xl shadow-indigo-900/15 border border-white/90 relative">
           
           {/* Tombol Kembali ke Beranda */}
           <Link

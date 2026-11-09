@@ -111,12 +111,12 @@ export default function ClassCodeCard() {
       </div>
 
       {/* Tombol Salin dan Ganti Kode */}
-      <div className="flex items-center gap-3 mt-4 pt-2">
+      <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5 sm:gap-3 mt-4 pt-2">
         <button
           type="button"
           onClick={handleCopy}
           disabled={!code}
-          className="flex-1 py-2.5 px-4 rounded-xl border border-slate-200 text-xs font-bold text-slate-700 hover:bg-slate-50 disabled:opacity-50 disabled:cursor-not-allowed transition flex items-center justify-center gap-2"
+          className="flex-1 py-2.5 px-4 rounded-xl border border-slate-200 text-xs font-bold text-slate-700 hover:bg-slate-50 disabled:opacity-50 disabled:cursor-not-allowed transition flex items-center justify-center gap-2 cursor-pointer"
         >
           <svg className="w-4 h-4 text-slate-500" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
@@ -128,7 +128,7 @@ export default function ClassCodeCard() {
           type="button"
           onClick={handleRegenerateCode}
           disabled={isUpdating || !classroom}
-          className="flex-1 py-2.5 px-4 rounded-xl bg-[#5B3DF5] text-white text-xs font-bold hover:bg-[#4E31E2] disabled:opacity-60 disabled:cursor-not-allowed transition flex items-center justify-center gap-2 shadow-sm"
+          className="flex-1 py-2.5 px-4 rounded-xl bg-[#5B3DF5] text-white text-xs font-bold hover:bg-[#4E31E2] disabled:opacity-60 disabled:cursor-not-allowed transition flex items-center justify-center gap-2 shadow-sm cursor-pointer"
         >
           <svg
             className={`w-4 h-4 ${isUpdating ? "animate-spin" : ""}`}

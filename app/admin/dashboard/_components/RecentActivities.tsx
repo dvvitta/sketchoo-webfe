@@ -44,7 +44,7 @@ export default function RecentActivities({
 }: RecentActivitiesProps) {
   return (
     <div
-      className={`bg-white rounded-3xl p-6 border border-slate-100 shadow-sm ${jakarta.className}`}
+      className={`bg-white rounded-3xl p-4 sm:p-6 border border-slate-100 shadow-sm ${jakarta.className}`}
     >
       <div className="flex items-center justify-between mb-5">
         <div className="flex items-center gap-2">
