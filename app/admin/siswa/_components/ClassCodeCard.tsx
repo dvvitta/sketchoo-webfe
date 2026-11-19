@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { Plus_Jakarta_Sans } from "next/font/google";
+import { QRCodeSVG } from "qrcode.react";
 import { siswaService, ClassroomItem } from "@/services/siswa.service";
 
 const jakarta = Plus_Jakarta_Sans({
@@ -11,25 +12,36 @@ const jakarta = Plus_Jakarta_Sans({
 
 export default function ClassCodeCard() {
   const [classroom, setClassroom] = useState<ClassroomItem | null>(null);
+  const [code, setCode] = useState("SKC-8K2P");
   const [copied, setCopied] = useState(false);
   const [isUpdating, setIsUpdating] = useState(false);
+  const [showQrModal, setShowQrModal] = useState(false);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   useEffect(() => {
     queueMicrotask(async () => {
       try {
         const res = await siswaService.getClassrooms();
-        // Ambil kelas pertama yang aktif
         const activeClassroom = res.items.find((c) => c.is_active) ?? res.items[0] ?? null;
         setClassroom(activeClassroom);
+        if (activeClassroom) {
+          try {
+            const codeRes = await siswaService.getClassroomCode(activeClassroom.id);
+            if (codeRes?.code) {
+              setCode(codeRes.code);
+              return;
+            }
+          } catch {
+            // fallback nama + id
+          }
+          const derived = `SKC-${activeClassroom.name.replace(/[^a-zA-Z0-9]/g, "").slice(0, 3).toUpperCase()}${activeClassroom.id.slice(0, 3).toUpperCase()}`;
+          setCode(derived);
+        }
       } catch (err) {
         console.error("Gagal memuat data kelas:", err);
       }
     });
   }, []);
-
-  const code = classroom
-    ? `SKC-${classroom.name.replace(/[^a-zA-Z0-9]/g, "").slice(0, 3).toUpperCase()}${classroom.id.slice(0, 3).toUpperCase()}`
-    : "SKC-8K2P";
 
   const handleCopy = () => {
     if (!code) return;
@@ -38,18 +50,19 @@ export default function ClassCodeCard() {
     setTimeout(() => setCopied(false), 2000);
   };
 
-  // Regenerate kode: update nama kelas dengan nama yang sama untuk trigger backend regenerasi join_code
-  // (endpoint PATCH /admin/classrooms/:id)
   const handleRegenerateCode = async () => {
     if (!classroom) return;
     setIsUpdating(true);
+    setErrorMessage(null);
     try {
-      const updated = await siswaService.updateClassroom(classroom.id, {
-        name: classroom.name,
-      });
-      setClassroom(updated);
-    } catch (err) {
+      const res = await siswaService.regenerateClassroomCode(classroom.id);
+      if (res?.code) {
+        setCode(res.code);
+      }
+    } catch (err: unknown) {
       console.error("Gagal memperbarui kode kelas:", err);
+      const msg = err instanceof Error ? err.message : "Gagal memperbarui kode kelas.";
+      setErrorMessage(msg);
     } finally {
       setIsUpdating(false);
     }
@@ -92,22 +105,28 @@ export default function ClassCodeCard() {
         </div>
 
         {/* Kotak QR Code */}
-        <div className="w-28 h-28 bg-white border border-slate-200 rounded-2xl p-2.5 flex flex-col items-center justify-between shrink-0 shadow-sm">
-          <div className="w-full h-16 bg-slate-900 rounded-lg flex items-center justify-center p-1">
-            <div className="w-full h-full border border-white flex flex-wrap gap-1 p-0.5 justify-center items-center">
-              <span className="w-2.5 h-2.5 bg-white rounded-xs" />
-              <span className="w-2.5 h-2.5 bg-white rounded-xs" />
-              <span className="w-2.5 h-2.5 bg-white rounded-xs" />
-              <span className="w-2.5 h-2.5 bg-white rounded-xs" />
-            </div>
+        <button
+          type="button"
+          onClick={() => setShowQrModal(true)}
+          className="w-28 h-28 bg-white border border-slate-200 rounded-2xl p-2.5 flex flex-col items-center justify-between shrink-0 shadow-sm hover:border-[#6342E8] hover:shadow-md transition cursor-pointer group"
+          title="Klik untuk memperbesar QR Code"
+        >
+          <div className="w-full flex-1 bg-white rounded-lg flex items-center justify-center p-1 overflow-hidden">
+            <QRCodeSVG
+              value={code}
+              size={60}
+              level="M"
+              bgColor="#FFFFFF"
+              fgColor="#1E1B4B"
+            />
           </div>
-          <span className="text-[10px] font-bold text-[#6342E8] flex items-center gap-1">
+          <span className="text-[10px] font-bold text-[#6342E8] group-hover:underline flex items-center gap-1">
             <svg className="w-3 h-3" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M16 20h4M4 12h4m12 0h.01M5 8h2a1 1 0 001-1V5a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1zm12 0h2a1 1 0 001-1V5a1 1 0 00-1-1h-2a1 1 0 00-1 1v2a1 1 0 001 1zM5 20h2a1 1 0 001-1v-2a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1z" />
             </svg>
             Lihat QR Code
           </span>
-        </div>
+        </button>
       </div>
 
       {/* Tombol Salin dan Ganti Kode */}
@@ -142,6 +161,62 @@ export default function ClassCodeCard() {
           {isUpdating ? "Memproses..." : "Ganti Kode"}
         </button>
       </div>
+
+      {errorMessage && (
+        <p className="text-[11px] font-semibold text-rose-500 mt-2 text-center">
+          {errorMessage}
+        </p>
+      )}
+
+      {/* Modal Tampilan Penuh QR Code untuk Smartboard & Siswa */}
+      {showQrModal && (
+        <div
+          role="dialog"
+          aria-modal="true"
+          className="fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex items-center justify-center p-4"
+          onClick={() => setShowQrModal(false)}
+        >
+          <div
+            className="bg-white rounded-3xl p-6 sm:p-8 max-w-sm w-full text-center shadow-2xl flex flex-col items-center animate-in fade-in zoom-in-95 duration-150"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="w-12 h-12 bg-[#EFEFFD] rounded-2xl flex items-center justify-center text-[#5B3DF5] mb-3">
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M16 20h4M4 12h4m12 0h.01M5 8h2a1 1 0 001-1V5a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1zm12 0h2a1 1 0 001-1V5a1 1 0 00-1-1h-2a1 1 0 00-1 1v2a1 1 0 001 1zM5 20h2a1 1 0 001-1v-2a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1z" />
+              </svg>
+            </div>
+            <h4 className="font-extrabold text-lg text-slate-800">
+              QR Code Ruang Kelas
+            </h4>
+            <p className="text-xs font-semibold text-[#5B3DF5] mt-0.5 mb-4">
+              {classroom?.name ?? "Kelas Belajar"} • {code}
+            </p>
+
+            <div className="p-4 bg-white border-2 border-slate-100 rounded-3xl shadow-inner mb-4 flex items-center justify-center">
+              <QRCodeSVG
+                value={code}
+                size={220}
+                level="H"
+                bgColor="#FFFFFF"
+                fgColor="#1E1B4B"
+              />
+            </div>
+
+            <p className="text-xs text-slate-500 mb-6 leading-relaxed">
+              Arahkan kamera tablet atau ponsel siswa ke QR Code ini atau masukkan kode{" "}
+              <strong className="text-slate-800 font-bold">{code}</strong>.
+            </p>
+
+            <button
+              type="button"
+              onClick={() => setShowQrModal(false)}
+              className="w-full py-3 rounded-xl bg-[#5B3DF5] text-white font-bold text-sm hover:bg-[#4E31E2] transition cursor-pointer shadow-sm"
+            >
+              Tutup
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

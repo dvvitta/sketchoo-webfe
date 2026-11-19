@@ -125,6 +125,18 @@ export const siswaService = {
     });
   },
 
+  // Kode kelas & QR: GET /api/v1/admin/classrooms/:id/code
+  getClassroomCode: (classroomId: string) => {
+    return apiFetch<{ code: string; short_code: string }>(`/admin/classrooms/${classroomId}/code`);
+  },
+
+  // Generate kode baru: POST /api/v1/admin/classrooms/:id/code
+  regenerateClassroomCode: (classroomId: string) => {
+    return apiFetch<{ code: string; short_code: string }>(`/admin/classrooms/${classroomId}/code`, {
+      method: "POST",
+    });
+  },
+
   // Sesi belajar: GET /api/v1/admin/sessions
   getSessions: (params?: { cursor?: string; limit?: number }) => {
     const query = new URLSearchParams();
